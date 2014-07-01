@@ -28,7 +28,11 @@
           .y(function(d) { return d[opts.y] })
           .width(opts.width)
           .height(opts.height)
-          .reduceXTicks(opts.reduceXTicks)
+        
+        if (typeof(opts.reduceXTicks) !== 'undefined' && !opts.reduceXTicks) {
+          chart = chart.reduceXTicks(opts.reduceXTicks)
+				}
+
         {{{ chart }}}
           
         {{{ xAxis }}}
