@@ -1,6 +1,8 @@
 d3_horizon:
   jshead: [js/d3.v3.js,js/horizon.js]
   cdn:
+    css:
+      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_horizon/css/base.css"
     jshead: 
-      - "http://d3js.org/d3.v3.min.js"
-      - "http://timelyportfolio.github.io/rCharts_d3_horizon/libraries/widgets/d3_horizon/js/horizon.js"
+      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_horizon/js/d3.v3.js"
+      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_horizon/js/horizon.js"
