@@ -1,8 +1,9 @@
 chord_diagram:
-  jshead: [js/d3.v3.min.js, js/chorddiagram.js]
+  jshead: [js/jquery-1.8.2.min.js, js/d3.v3.min.js, js/chorddiagram.js]
   css: [css/style.css]
   cdn:
     jshead: 
+      - "http://code.jquery.com/jquery-1.8.2.min.js"
       - "http://timelyportfolio.github.io/rCharts_chord/js/d3.v3.min.js"
       - "http://timelyportfolio.github.io/rCharts_chord/js/chorddiagram.js"
     css: "http://timelyportfolio.github.io/rCharts_chord/css/style.css"
