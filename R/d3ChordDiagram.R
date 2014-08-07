@@ -25,7 +25,7 @@ ChordDiagram = setRefClass('ChordDiagram', contains = 'rCharts', methods = list(
   },
   getPayload = function(chartId){
     chordD = toChain(params[!(names(params) %in% c('dom', 'data', 'matrix'))], "d3.chordDiagram()")
-    chartParams = RJSONIO:::toJSON(params1)
+    chartParams = RJSONIO:::toJSON(params)
     list(chordD = chordD, chartParams = chartParams, data=toJSONArray(params[['data']]),
          matrix=toJSONArray(params[['matrix']]), chartId = chartId, lib = basename(lib), liburl = LIB$url
     )
