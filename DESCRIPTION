@@ -24,6 +24,7 @@ Collate:
     'utils.R'
     'utils-rickshaw.R'
     'rChartsClass.R'
+    'd3ChordDiagram.R'
     'Datatables.R'
     'Dimple.R'
     'Polycharts.R'
