@@ -97,7 +97,7 @@ function draw{{chartId}}() {
       right: parseInt(opts.right) || 0,
       bottom: parseInt(opts.bottom) || 20,
       left: parseInt(opts.left) || 320 },
-    cellSize=12;
+    cellSize = parseInt(opts.cellSize) || 12,
     legendElementWidth = cellSize*2.5
     
   var colors = [ // negative values '#005824','#1A693B','#347B53','#4F8D6B','#699F83','#83B09B','#9EC2B3','#B8D4CB','#D2E6E3','#EDF8FB',
