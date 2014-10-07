@@ -81,18 +81,22 @@
 function draw{{chartId}}() {  
   
   var chartParams = {{{ chartParams }}}
-  var opts = {},
+  var opts = chartParams.opts,
     data = chartParams.data,
     x = chartParams.x,
     y = chartParams.y
 
   opts.id = chartParams.id;
 
-  console.log(data);
+  console.log(opts);
 
   $("#" + opts.id).append('<div id="tooltip" class="hidden"> <p><span id="value"></p> </div>')
 
-  var margin = { top: 320, right: 10, bottom: 20, left: 320 },
+  var margin = {
+      top: parseInt(opts.top) || 240,
+      right: parseInt(opts.right) || 0,
+      bottom: parseInt(opts.bottom) || 20,
+      left: parseInt(opts.left) || 320 },
     cellSize=12;
     legendElementWidth = cellSize*2.5
     
