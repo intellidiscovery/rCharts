@@ -1,0 +1,7 @@
+heatmap:
+  jshead: [js/jquery-1.8.2.min.js, js/d3.v3.min.js]
+  css: [css/style.css]
+  cdn:
+    jshead: 
+      - "http://code.jquery.com/jquery-1.8.2.min.js"
+      - "http://d3js.org/d3.v3.min.js"
