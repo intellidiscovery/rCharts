@@ -108,9 +108,24 @@ function draw{{chartId}}() {
   var colLabel = data[x];
 
   rowLabel = d3.set(rowLabel).values();
-  rowLabel.sort();
+  // if these row labels are all numeric ones
+  if (rowLabel.filter(function(x) {return isNaN(parseFloat(x))}).length == 0) {
+    rowLabel = rowLabel.map(function(x) {return parseFloat(x)})
+    rowLabel.sort(d3.ascending);
+    rowLabel = rowLabel.map(function(x) {return x+""})
+  } else {
+    rowLabel.sort();
+  }
+
   colLabel = d3.set(colLabel).values();
-  colLabel.sort();
+  // if these row labels are all numeric ones
+  if (colLabel.filter(function(x) {return isNaN(parseFloat(x))}).length == 0) {
+    colLabel = colLabel.map(function(x) {return parseFloat(x)})
+    colLabel.sort(d3.ascending);
+    colLabel = colLabel.map(function(x) {return x+""})
+  } else {
+    colLabel.sort();
+  }
 
   console.log(rowLabel);
   console.log(colLabel);
