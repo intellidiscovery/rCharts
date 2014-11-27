@@ -1,13 +1,24 @@
+.node {
+  cursor: pointer;
+}
+
+.overlay{
+  background-color:#EEE;
+}
+   
 .node circle {
   fill: #fff;
-	stroke: steelblue;
-  stroke-width: 3px;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
- 
-.node text { font: 12px sans-serif; }
- 
+   
+.node text {
+  font-size:10px; 
+  font-family:sans-serif;
+}
+   
 .link {
   fill: none;
-	stroke: #ccc;
-	stroke-width: 2px;
+  stroke: #ccc;
+  stroke-width: 3px;
 }
