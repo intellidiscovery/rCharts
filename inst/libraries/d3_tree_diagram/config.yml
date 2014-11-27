@@ -6,4 +6,4 @@ chord_diagram:
       - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/js/jquery-1.8.2.min.js"
       - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/js/d3.v3.min.js"
       - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/js/treediagram.js"
-    css: "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_horizon/css/style.css"
+    css: "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/css/style.css"
