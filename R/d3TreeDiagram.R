@@ -16,6 +16,8 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
 
       var treeData = [];
       params.data.forEach(function(node) {
+        // add short name
+        node.sname = ((node.name.length>30)&&(/^.*\\sin\\s.*$/.test(node.name)))?node.name.substr(0,25)+"...":node.name;
         // add to parent
         var parent = dataMap[node.parent];
         if (parent) {
@@ -128,7 +130,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
           .call(zoomListener);
       
       // Append a group which holds all nodes and which the zoom Listener can act upon.
-      var svgGroup = baseSvg.append("g");
+      var svgGroup = baseSvg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");;
 
       // Define the root
       root = treeData[0];
@@ -137,7 +139,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
 
       // Layout the tree initially and center on the root node.
       update(root);
-      centerNode(root);
+      //centerNode(root);
     
       // Function to center node when clicked/dropped so node doesn\'t get lost when collapsing/moving with large amount of children.
     
@@ -176,6 +178,21 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
         centerNode(d);
       }
 
+      // display long name when hovered
+      /*function mouseover(d) {
+        d3.select(this)
+          .select("text.nodeText")
+          .text(function(d){ return d.name})
+          .style("font-color", "red");
+      }
+
+      function mouseout(d) {
+        d3.select(this)
+          .select("text.nodeText")
+          .text(function(d){ return d.sname})
+          .style("font-color", "black");
+      }*/
+
       // Helper functions for collapsing and expanding nodes.
 
       function collapse(d) {
@@ -213,7 +230,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
 
         childCount(0, root);
         var newHeight = d3.max(levelWidth) * 50; // 50 pixels per line  
-        tree = tree.size([newHeight, width]);
+        //tree = tree.size([newHeight, width]);
         
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -221,10 +238,10 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
         
         // Set widths between levels based on maxLabelLength.
         nodes.forEach(function(d) {
-          d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
+          //d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
           // alternatively to keep a fixed scale one can set a fixed depth per level
           // Normalize for fixed-depth by commenting out below line
-          // d.y = (d.depth * 500); //500px per level.
+          d.y = (d.depth * 180); //180px per level.
         });
         
         // Update the nodes…
@@ -240,6 +257,8 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
             return "translate(" + source.y0 + "," + source.x0 + ")";
           })
           .on("click", click);
+          //.on("mouseover", mouseover)
+          //.on("mouseout", mouseout);
         
         nodeEnter.append("circle")
           .attr("class", "nodeCircle")
@@ -252,26 +271,28 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
           .attr("x", function(d) {
             return d.children || d._children ? -10 : 10;
           })
-          .attr("dy", ".35em")
+          .attr("dy", function(d) {
+            return d.children || d._children ? "2em" : ".35em";
+          })
           .attr("class", "nodeText")
           .attr("text-anchor", function(d) {
             return d.children || d._children ? "end" : "start";
           })
           .text(function(d) {
-            return d.name;
+            return d.sname;
           })
           .style("fill-opacity", 0);
         
         // Update the text to reflect whether node has children or not.
         node.select("text")
           .attr("x", function(d) {
-            return d.children || d._children ? -10 : 10;
+            return d.children || d._children ? d.sname.length*2.5 : 10;
           })
           .attr("text-anchor", function(d) {
             return d.children || d._children ? "end" : "start";
           })
           .text(function(d) {
-            return d.name;
+            return d.sname;
           });
         
         // Change the circle fill depending on whether it has children and is collapsed
