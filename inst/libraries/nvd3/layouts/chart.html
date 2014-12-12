@@ -29,6 +29,9 @@
           .width(opts.width)
           .height(opts.height)
         
+        d3.rebind('clipVoronoi');
+        chart.clipVoronoi(false);
+
         if (typeof(opts.reduceXTicks) !== 'undefined' && !opts.reduceXTicks) {
           chart = chart.reduceXTicks(opts.reduceXTicks)
 				}
