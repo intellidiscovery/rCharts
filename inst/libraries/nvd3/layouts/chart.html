@@ -29,8 +29,13 @@
           .width(opts.width)
           .height(opts.height)
         
-        d3.rebind('clipVoronoi');
-        chart.clipVoronoi(false);
+        try {
+          d3.rebind('clipVoronoi');
+          chart.clipVoronoi(false);
+        } catch(e) {
+          // just because some nvd3 have this options and some don't
+          true
+        }
 
         if (typeof(opts.reduceXTicks) !== 'undefined' && !opts.reduceXTicks) {
           chart = chart.reduceXTicks(opts.reduceXTicks)
