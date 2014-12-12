@@ -274,7 +274,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
           d.y = (d.depth * 180); //180px per level.
         });
         
-        // Update the nodes…
+        // Update the node...
         node = svgGroup.selectAll("g.node")
           .data(nodes, function(d) {
             return d.id || (d.id = ++i);
@@ -357,7 +357,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
         nodeExit.select("text")
           .style("fill-opacity", 0);
         
-        // Update the links…
+        // Update the link...
         var link = svgGroup.selectAll("path.link")
           .data(links, function(d) {
             return d.target.id;
