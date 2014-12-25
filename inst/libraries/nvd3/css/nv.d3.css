@@ -668,4 +668,8 @@ svg .title {
   */
 }
 
+.nvd3.nv-discreteBarWithAxes .nv-x.nv-axis line {
+  stroke: none;
+  fill: none;
+}
 
