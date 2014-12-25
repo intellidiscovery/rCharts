@@ -179,19 +179,49 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
       }
 
       // display long name when hovered
-      /*function mouseover(d) {
+      function mouseover(d) {
+        // Make the circle bigger
         d3.select(this)
-          .select("text.nodeText")
+          .select("circle")
+          .transition()
+          .attr("r", 7)
+          .style("fill", function(d) {
+            return d._children ? "lightsteelblue" : "#fff";
+          })
+          .style("stroke-width", "3px");
+
+        d3.select(this)
+          .select("text")
+          .attr("x", function(d) {
+            return d.children || d._children ? d.name.length*2.5 : 10;
+          })
           .text(function(d){ return d.name})
-          .style("font-color", "red");
+          .style("font-weight", "bold")
+          .style("fill", "blue")
+          .style("font-size", "12px");
       }
 
       function mouseout(d) {
+        // set back circle\'s original radius
         d3.select(this)
-          .select("text.nodeText")
+          .select("circle")
+          .transition()
+          .attr("r", 4.5)
+          .style("fill", function(d) {
+            return d._children ? "lightsteelblue" : "#fff";
+          })
+          .style("stroke-width", "1.5px");
+
+        d3.select(this)
+          .select("text")
+          .attr("x", function(d) {
+            return d.children || d._children ? d.sname.length*2.5 : 10;
+          })
           .text(function(d){ return d.sname})
-          .style("font-color", "black");
-      }*/
+          .style("font-weight", "normal")
+          .style("fill", "black")
+          .style("font-size", "10px");
+      }
 
       // Helper functions for collapsing and expanding nodes.
 
@@ -244,7 +274,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
           d.y = (d.depth * 180); //180px per level.
         });
         
-        // Update the nodes…
+        // Update the node...
         node = svgGroup.selectAll("g.node")
           .data(nodes, function(d) {
             return d.id || (d.id = ++i);
@@ -256,9 +286,9 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
           .attr("transform", function(d) {
             return "translate(" + source.y0 + "," + source.x0 + ")";
           })
-          .on("click", click);
-          //.on("mouseover", mouseover)
-          //.on("mouseout", mouseout);
+          .on("click", click)
+          .on("mouseover", mouseover)
+          .on("mouseout", mouseout);
         
         nodeEnter.append("circle")
           .attr("class", "nodeCircle")
@@ -272,7 +302,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
             return d.children || d._children ? -10 : 10;
           })
           .attr("dy", function(d) {
-            return d.children || d._children ? "2em" : ".35em";
+            return d.children || d._children ? "1.5em" : ".35em";
           })
           .attr("class", "nodeText")
           .attr("text-anchor", function(d) {
@@ -327,7 +357,7 @@ TreeDiagram = setRefClass('TreeDiagram', contains = 'rCharts', methods = list(
         nodeExit.select("text")
           .style("fill-opacity", 0);
         
-        // Update the links…
+        // Update the link...
         var link = svgGroup.selectAll("path.link")
           .data(links, function(d) {
             return d.target.id;
