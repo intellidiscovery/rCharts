@@ -104,9 +104,12 @@ function draw{{chartId}}() {
   //var colors = [ // negative values '#005824','#1A693B','#347B53','#4F8D6B','#699F83','#83B09B','#9EC2B3','#B8D4CB','#D2E6E3','#EDF8FB',
   //  '#FFFFFF','#F1EEF6','#E6D3E1','#DBB9CD','#D19EB9','#C684A4','#BB6990','#B14F7C','#A63467','#9B1A53','#91003F'];
   var colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
+  if (typeof(chartParams.colors) !== 'undefined') {
+    colors = chartParams.colors
+  }  
   //var colors = ['#fff7bc','#fee391','#fec44f','#fe9929','#ec7014'];
   //var colors = ['rgb(255,255,229)','rgb(255,247,188)','rgb(254,227,145)','rgb(254,196,79)','rgb(254,153,41)','rgb(236,112,20)','rgb(204,76,2)','rgb(153,52,4)','rgb(102,37,6)'],
-    buckets = 9;
+  var  buckets = 9;
   
   // data model, d.col, d.row, d.value, and separate array for labels
   var rowLabel = data[y];
@@ -272,7 +275,7 @@ function draw{{chartId}}() {
     .attr("y", function (d, i) { return (i+1) * legendElementHeight; })
     .attr("transform", "translate(" + cellSize*(col_number+6) + "," + cellSize / 1.5 + ")")
 
-// Change ordering of cells
+  // Change ordering of cells
 
   function sortbylabel(rORc,i,sortOrder){
        var t = svg.transition().duration(1000);
@@ -303,6 +306,22 @@ function draw{{chartId}}() {
          ;
        }
   }
+
+  //add our title with html
+  //might be better with svg
+  d3.select("#" + opts.id).insert("h3","svg")
+    .text(opts.title)
+    //if desired, could change styling with css or with d3
+    //some examples here http://tympanus.net/codrops/2012/11/02/heading-set-styling-with-css/
+    //will use example
+    //.style("float","right");
+    //.style("text-shadow", "0 -1px 1px rgba(0,0,0,0.4)")
+    .style("font-size","22px")
+    .style("line-height", "40px")
+    .style("color", "#355681")
+    //.style("ext-transform", "uppercase")
+    .style("border-bottom", "1px solid rgba(53,86,129, 0.3)");
+
 };
 
 $(document).ready(function(){
