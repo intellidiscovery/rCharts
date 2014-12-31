@@ -4,6 +4,6 @@ d3_tree_diagram:
   cdn:
     jshead:
       - "/pi/static/custom/jquery-1.8.2.min.js"
-      - "/pi/static/custom/d3.v3.min-new.js"
+      - "/pi/static/custom/d3.v3.min.js"
     css:
       - "/pi/static/custom/treediagram.css"
