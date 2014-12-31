@@ -2,9 +2,9 @@ nvd3:
   css: [css/nv.d3.css, css/rNVD3.css]
   jshead: [js/jquery-1.8.2.min.js, js/d3.v3.min.js, "js/nv.d3.min-new.js", js/fisheye.js]
   cdn:
-    css: https://s3.amazonaws.com/ada-pI/static/rCharts/libs/nvd3/css/nv.d3.css
+    css: /pi/static/custom/nv.d3.css
     jshead: 
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/nvd3/js/jquery-1.8.2.min.js"
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/nvd3/js/d3.v3.min.js"
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/nvd3/js/nv.d3.min-new.js"
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/nvd3/js/fisheye.js"
+      - "/pi/static/custom/jquery-1.8.2.min.js"
+      - "/pi/static/custom/d3.v3.min.js"
+      - "/pi/static/custom/nv.d3.min-new.js"
+      - "/pi/static/custom/fisheye.js"

@@ -3,8 +3,7 @@ d3_tree_diagram:
   css: [css/style.css]
   cdn:
     jshead:
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/js/jquery-1.8.2.min.js"
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/js/d3.v3.min.js"
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/js/treediagram.js"
+      - "/pi/static/custom/jquery-1.8.2.min.js"
+      - "/pi/static/custom/d3.v3.min-new.js"
     css:
-      - "https://s3.amazonaws.com/ada-pI/static/rCharts/libs/d3_tree_diagram/css/style.css"
+      - "/pi/static/custom/treediagram.css"
