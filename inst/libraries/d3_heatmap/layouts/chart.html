@@ -19,7 +19,7 @@
       }
 
       rect.cell-border {
-        stroke: #eee;
+        stroke: #ffffd7;
         stroke-width:0.3px;   
       }
 
@@ -34,9 +34,9 @@
       }
 
       text.mono {
-        font-size: 9pt;
-        font-family: Consolas, courier;
-        fill: #aaa;
+        font-size: 5pt;
+        font-family: sans-serif;
+        fill: #4d4d4d;
       }
 
       text.text-selected {
@@ -49,18 +49,19 @@
       text.text-hover {
         fill: #00C;
       }
+
       #tooltip {
         position: absolute;
-        width: 240px;
+        width: auto;
         height: auto;
         padding: 10px;
         background-color: white;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         pointer-events: none;
       }
 
@@ -71,8 +72,8 @@
       #tooltip p {
         margin: 0;
         font-family: sans-serif;
-        font-size: 12px;
-        line-height: 20px;
+        font-size: 8px;
+        line-height: 13px;
       }
     </style>
     
@@ -101,9 +102,8 @@ function draw{{chartId}}() {
     legendElementWidth = cellSize
     legendElementHeight = cellSize*1.5
     
-  //var colors = [ // negative values '#005824','#1A693B','#347B53','#4F8D6B','#699F83','#83B09B','#9EC2B3','#B8D4CB','#D2E6E3','#EDF8FB',
-  //  '#FFFFFF','#F1EEF6','#E6D3E1','#DBB9CD','#D19EB9','#C684A4','#BB6990','#B14F7C','#A63467','#9B1A53','#91003F'];
-  var colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+  //var colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+  var colors = ["#ffffd7","#fff6ba","#ffee80","#ffdd47","#ffab3b","#ff7f2b","#ff6600","#ff2400","#d10000","#ab0000"]
   if (typeof(chartParams.colors) !== 'undefined') {
     colors = chartParams.colors
   }  
@@ -273,7 +273,7 @@ function draw{{chartId}}() {
     .attr("height", legendElementHeight)
     .attr("x", 0)
     .attr("y", function (d, i) { return (i+1) * legendElementHeight; })
-    .attr("transform", "translate(" + cellSize*(col_number+6) + "," + cellSize / 1.5 + ")")
+    .attr("transform", "translate(" + cellSize*(col_number+6) + "," + (cellSize / 1.5 - 1) + ")")
 
   // Change ordering of cells
 
@@ -309,7 +309,7 @@ function draw{{chartId}}() {
 
   //add our title with html
   //might be better with svg
-  d3.select("#" + opts.id).insert("h3","svg")
+  /*d3.select("#" + opts.id).insert("h3","svg")
     .text(opts.title)
     //if desired, could change styling with css or with d3
     //some examples here http://tympanus.net/codrops/2012/11/02/heading-set-styling-with-css/
@@ -320,7 +320,7 @@ function draw{{chartId}}() {
     .style("line-height", "40px")
     .style("color", "#355681")
     //.style("ext-transform", "uppercase")
-    .style("border-bottom", "1px solid rgba(53,86,129, 0.3)");
+    .style("border-bottom", "1px solid rgba(53,86,129, 0.3)");*/
 
 };
 
