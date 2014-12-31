@@ -34,9 +34,9 @@
       }
 
       text.mono {
-        font-size: 9pt;
-        font-family: Consolas, courier;
-        fill: #aaa;
+        font-size: 5pt;
+        font-family: sans-serif;
+        fill: #4d4d4d;
       }
 
       text.text-selected {
@@ -49,18 +49,19 @@
       text.text-hover {
         fill: #00C;
       }
+
       #tooltip {
         position: absolute;
-        width: 240px;
+        width: auto;
         height: auto;
         padding: 10px;
         background-color: white;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         pointer-events: none;
       }
 
@@ -71,8 +72,8 @@
       #tooltip p {
         margin: 0;
         font-family: sans-serif;
-        font-size: 12px;
-        line-height: 20px;
+        font-size: 8px;
+        line-height: 13px;
       }
     </style>
     
@@ -272,7 +273,7 @@ function draw{{chartId}}() {
     .attr("height", legendElementHeight)
     .attr("x", 0)
     .attr("y", function (d, i) { return (i+1) * legendElementHeight; })
-    .attr("transform", "translate(" + cellSize*(col_number+6) + "," + cellSize / 1.5 + ")")
+    .attr("transform", "translate(" + cellSize*(col_number+6) + "," + (cellSize / 1.5 - 1) + ")")
 
   // Change ordering of cells
 
