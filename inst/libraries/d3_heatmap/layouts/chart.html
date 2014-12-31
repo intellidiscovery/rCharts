@@ -19,7 +19,7 @@
       }
 
       rect.cell-border {
-        stroke: #eee;
+        stroke: #ffffd7;
         stroke-width:0.3px;   
       }
 
@@ -101,9 +101,8 @@ function draw{{chartId}}() {
     legendElementWidth = cellSize
     legendElementHeight = cellSize*1.5
     
-  //var colors = [ // negative values '#005824','#1A693B','#347B53','#4F8D6B','#699F83','#83B09B','#9EC2B3','#B8D4CB','#D2E6E3','#EDF8FB',
-  //  '#FFFFFF','#F1EEF6','#E6D3E1','#DBB9CD','#D19EB9','#C684A4','#BB6990','#B14F7C','#A63467','#9B1A53','#91003F'];
-  var colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+  //var colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+  var colors = ["#ffffd7","#fff6ba","#ffee80","#ffdd47","#ffab3b","#ff7f2b","#ff6600","#ff2400","#d10000","#ab0000"]
   if (typeof(chartParams.colors) !== 'undefined') {
     colors = chartParams.colors
   }  
