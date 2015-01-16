@@ -34,7 +34,13 @@
       }
 
       text.mono {
-        font-size: 5pt;
+        font-size: 7pt;
+        font-family: sans-serif;
+        fill: #4d4d4d;
+      }
+
+      text.mono2 {
+        font-size: 9pt;
         font-family: sans-serif;
         fill: #4d4d4d;
       }
@@ -69,11 +75,18 @@
         display: none;
       }
 
-      #tooltip p {
+      #tooltip p.p1 {
         margin: 0;
         font-family: sans-serif;
         font-size: 8px;
         line-height: 13px;
+      }
+
+      #tooltip p.p2 {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 12px;
+        line-height: 15px;
       }
     </style>
     
@@ -91,22 +104,36 @@ function draw{{chartId}}() {
 
   console.log(opts);
 
-  $("#" + opts.id).append('<div id="tooltip" class="hidden"> <p><span id="value"></p> </div>')
+  var cellSize_small = 12,
+      cellSize_big = 36;
+
+  if (cellSize == cellSize_small) {
+    $("#" + opts.id).append('<div id="tooltip" class="hidden"> <p class="p1"><span id="value"></p> </div>')
+  } else {
+    $("#" + opts.id).append('<div id="tooltip" class="hidden"> <p class="p2"><span id="value"></p> </div>')
+  }
+  
 
   var margin = {
       top: parseInt(opts.top) || 240,
       right: parseInt(opts.right) || 0,
       bottom: parseInt(opts.bottom) || 20,
       left: parseInt(opts.left) || 320 },
-    cellSize = parseInt(opts.cellSize) || 12,
-    legendElementWidth = cellSize
-    legendElementHeight = cellSize*1.5
+    cellSize = parseInt(opts.cellSize) || cellSize_small,
+    legendElementWidth = cellSize_small
+    legendElementHeight = legendElementWidth * 2
     
   //var colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
   var colors = ["#ffffd7","#fff6ba","#ffee80","#ffdd47","#ffab3b","#ff7f2b","#ff6600","#ff2400","#d10000","#ab0000"]
-  if (typeof(chartParams.colors) !== 'undefined') {
-    colors = chartParams.colors
+  
+  if (cellSize == cellSize_big) {
+    colors = ["#ffffd7","#ffee80","#ffab3b","#ff6600","#d10000"]
   }  
+  
+  //if (typeof(chartParams.colors) !== 'undefined') {
+  //  colors = chartParams.colors
+  //}
+
   //var colors = ['#fff7bc','#fee391','#fec44f','#fe9929','#ec7014'];
   //var colors = ['rgb(255,255,229)','rgb(255,247,188)','rgb(254,227,145)','rgb(254,196,79)','rgb(254,153,41)','rgb(236,112,20)','rgb(204,76,2)','rgb(153,52,4)','rgb(102,37,6)'],
   var  buckets = 9;
@@ -165,12 +192,13 @@ function draw{{chartId}}() {
       //.domain([0, buckets - 1, d3.max(intensities)])
       .domain(intensities)
       .range(colors);
+  
 
   console.log("colorScale = ", colorScale.quantiles());
   console.log(colorScale.quantiles().concat(d3.max(intensities)));
   
   var svg = d3.select("#" + opts.id).append("svg")
-      .attr("width", width + (legendElementWidth*10))
+      .attr("width", width + (cellSize*10))
       .attr("height", height+(cellSize*10))
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -187,7 +215,15 @@ function draw{{chartId}}() {
       .attr("y", function (d, i) { return i * cellSize; })
       .style("text-anchor", "end")
       .attr("transform", "translate(-10," + cellSize / 1.5 + ")")
-      .attr("class", function (d,i) { return "rowLabel mono r"+i;} ) 
+      .attr("class", function (d,i) {
+                      // a bit hard-coded here
+                      // TO-DO: should be based on a flag of big or small cell Size
+                      if(cellSize==cellSize_small) {
+                        return "rowLabel mono r"+i;
+                      }
+                      return "rowLabel mono2 r"+i;
+                    }
+            ) 
       .on("mouseover", function(d) {d3.select(this).classed("text-hover",true);})
       .on("mouseout" , function(d) {d3.select(this).classed("text-hover",false);})
       .on("click", function(d,i) {rowSortOrder=!rowSortOrder; sortbylabel("r",i,rowSortOrder);})
@@ -204,6 +240,15 @@ function draw{{chartId}}() {
       .style("text-anchor", "left")
       .attr("transform", "translate("+cellSize/2 + ",-10) rotate (-90)")
       .attr("class",  function (d,i) { return "colLabel mono c"+i;} )
+      .attr("class", function (d,i) {
+                      // a bit hard-coded here
+                      // TO-DO: should be based on a flag of big or small cell Size
+                      if(cellSize==cellSize_small) {
+                        return "colLabel mono c"+i;
+                      }
+                      return "colLabel mono2 c"+i;
+                    }
+            )
       .on("mouseover", function(d) {d3.select(this).classed("text-hover",true);})
       .on("mouseout" , function(d) {d3.select(this).classed("text-hover",false);})
       .on("click", function(d,i) {colSortOrder=!colSortOrder;  sortbylabel("c",i,colSortOrder);})
@@ -252,28 +297,39 @@ function draw{{chartId}}() {
         ;
 
   var quantiles = colorScale.quantiles()
+  quantiles = quantiles.concat(d3.max(intensities))
+
   var legend = svg.append("g").attr("class","legends")
       .selectAll(".legend")
-      .data(quantiles.concat(d3.max(intensities)), function(d) { return d; })
+      .data(quantiles, function(d) { return d; })
       .enter().append("g")
       .attr("class", "legend");
  
   legend.append("rect")
     .attr("x", 0)
-    .attr("y", function (d, i) { return i * legendElementHeight; })
+    .attr("y", function (d, i) { console.log("legend" + i); return i * legendElementHeight; })
     .attr("width", legendElementWidth)
     .attr("height", legendElementHeight)
     .style("fill", function(d, i) { return colors[i]; })
-    .attr("transform", "translate(" + cellSize*(col_number+4) + "," + cellSize / 1.5 + ")")
+    .attr("transform", "translate(" + (cellSize*(col_number+(cellSize==12?5:2))+ legendElementWidth) + "," + cellSize / 1.5 + ")")
  
   legend.append("text")
     .attr("class", "mono")
+    .attr("class", function (d,i) {
+                      // a bit hard-coded here
+                      // TO-DO: should be based on a flag of big or small cell Size
+                      if(cellSize==cellSize_small) {
+                        return "mono";
+                      }
+                      return "mono2";
+                    }
+            )
     .text(function(d) { return "<= " + Math.round(d); })
-    .attr("width", legendElementWidth)
+    .attr("width", legendElementWidth*3)
     .attr("height", legendElementHeight)
     .attr("x", 0)
     .attr("y", function (d, i) { return (i+1) * legendElementHeight; })
-    .attr("transform", "translate(" + cellSize*(col_number+6) + "," + (cellSize / 1.5 - 1) + ")")
+    .attr("transform", "translate(" + (cellSize*(col_number+(cellSize==12?5:2)) + 2.5*legendElementWidth) + "," + (cellSize / 1.5 - 1) + ")")
 
   // Change ordering of cells
 
