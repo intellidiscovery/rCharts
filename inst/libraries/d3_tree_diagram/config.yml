@@ -1,5 +1,5 @@
 d3_tree_diagram:
-  jshead: [js/jquery-1.8.2.min.js, js/d3.v3.min.js, js/treediagram.js]
+  jshead: [js/jquery-1.8.2.min.js, js/d3.v3.min.js]
   css: [css/style.css]
   cdn:
     jshead:
