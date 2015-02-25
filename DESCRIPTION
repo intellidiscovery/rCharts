@@ -26,6 +26,7 @@ Collate:
     'rChartsClass.R'
     'd3ChordDiagram.R'
     'd3TreeDiagram.R'
+    'd3ForceDirectedGraph.R'
     'Datatables.R'
     'Dimple.R'
     'Polycharts.R'
